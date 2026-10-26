@@ -22,6 +22,18 @@ function validateInput (day, month, year, gender) {
     return true;
 }
 
+function calculateDayOfWeek (day, month, year) {
+    const cc = Math.floor(year / 100);
+    const yy = year % 100;
+
+    d = (Math.floor(cc / 4) - 2 * cc - 1
+        + Math.floor((5 * yy) / 4)
+        + Math.floor( (26 * (month + 1)) / 10 )
+        + day) % 7;
+    
+    return d;
+}
+
 generateButton.addEventListener ("click", function () {
     const day = dayInput.value;
     const month = monthInput.value;
