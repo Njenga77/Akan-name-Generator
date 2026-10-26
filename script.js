@@ -23,6 +23,12 @@ function validateInput (day, month, year, gender) {
 }
 
 function calculateDayOfWeek (day, month, year) {
+
+    if (month < 3) {
+        month = month + 12;
+        year = year - 1;
+    }
+    
     const cc = Math.floor(year / 100);
     const yy = year % 100;
 
