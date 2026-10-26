@@ -7,6 +7,11 @@ const monthInput = document.getElementById("month");
 const yearInput = document.getElementById("year");
 const genderSelect = document.getElementById("gender");
 const generateButton = document.getElementById("generate");
+const bornOn = document.getElementById("bornOn");
+const akanNameDisplay = document.getElementById("akanName");
+const formSection = document.getElementById("formSection");
+const resultCard = document.getElementById("resultCard");
+const resetButton = document.getElementById("reset");
 
 function validateInput (day, month, year, gender) {
     if (day === "" || month === "" || year === "" || gender === "") {
@@ -51,6 +56,14 @@ function getAkanName (dayNumber, gender) {
     return femaleNames[dayNumber];
 }
 
+function showResult (dayNumber, akanName) {
+    bornOn.textContent = `You were born on a ${dayNames[dayNumber]}`;
+    akanNameDisplay.textContent = akanName;
+
+    formSection.classList.add("hidden");
+    resultCard.classList.remove("hidden");
+}
+
 
 generateButton.addEventListener ("click", function () {
     const day = dayInput.value;
@@ -64,5 +77,15 @@ generateButton.addEventListener ("click", function () {
 
     const dayNumber = calculateDayOfWeek (Number(day), Number(month), Number(year) );
     const akanName = getAkanName (dayNumber, gender);
-    console.log(dayNames[dayNumber], akanName);
+    showResult(dayNumber, akanName);
 });
+
+resetButton.addEventListener("click", function () {
+    dayInput.value = "";
+    monthInput.value = "";
+    yearInput.value = "";
+    genderSelect.value = "";
+
+    resultCard.classList.add("hidden");
+    formSection.classList.remove("hidden");
+})
