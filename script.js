@@ -23,12 +23,12 @@ function validateInput (day, month, year, gender) {
 }
 
 function calculateDayOfWeek (day, month, year) {
-
+// The formula counts January and February as months 13 and 14 of the previous year
     if (month < 3) {
         month = month + 12;
         year = year - 1;
     }
-    
+
     const cc = Math.floor(year / 100);
     const yy = year % 100;
 
@@ -50,5 +50,6 @@ generateButton.addEventListener ("click", function () {
         return;
     }
 
-    console.log("Valid input:", day, month, year, gender);
+    const dayNumber = calculateDayOfWeek (Number(day), Number(month), Number(year) );
+    console.log("Day of the week", dayNumber);
 });
