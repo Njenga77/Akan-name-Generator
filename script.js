@@ -1,3 +1,7 @@
+const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+const maleNames = ["Kwasi", "Kwadwo", "Kwabena", "Kwaku", "Yaw", "Kofi", "Kwame"]
+const femaleNames = ["Akosua", "Adwoa", "Abenaa", "Akua", "Yaa", "Afua", "Ama"]
+
 const dayInput = document.getElementById("day");
 const monthInput = document.getElementById("month");
 const yearInput = document.getElementById("year");
@@ -40,6 +44,14 @@ function calculateDayOfWeek (day, month, year) {
     return (d + 7) % 7;
 }
 
+function getAkanName (dayNumber, gender) {
+    if (gender === "male") {
+        return maleNames[dayNumber];
+    }
+    return femaleNames[dayNumber];
+}
+
+
 generateButton.addEventListener ("click", function () {
     const day = dayInput.value;
     const month = monthInput.value;
@@ -51,5 +63,6 @@ generateButton.addEventListener ("click", function () {
     }
 
     const dayNumber = calculateDayOfWeek (Number(day), Number(month), Number(year) );
-    console.log("Day of the week", dayNumber);
+    const akanName = getAkanName (dayNumber, gender);
+    console.log(dayNames[dayNumber], akanName);
 });
