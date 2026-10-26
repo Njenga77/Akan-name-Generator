@@ -31,7 +31,7 @@ function calculateDayOfWeek (day, month, year) {
         + Math.floor( (26 * (month + 1)) / 10 )
         + day) % 7;
     
-    return d;
+    return (d + 7) % 7;
 }
 
 generateButton.addEventListener ("click", function () {
