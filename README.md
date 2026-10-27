@@ -60,3 +60,73 @@ Where CC is the first two digits of the year, YY is the last two digits, MM is t
 | Thursday  | Yaw       | Yaa         |
 | Friday    | Kofi      | Afua        |
 | Saturday  | Kwame     | Ama         |
+
+
+
+## Behaviour-Driven Development (BDD)
+
+The app's expected behaviour is described below as scenarios.
+
+```gherkin
+Feature: Akan name generator
+  As a user
+  I want to enter my date of birth and gender
+  So that I can find out my Akan name
+
+  Scenario: A male user born on a Thursday
+    Given I am on the Akan Name Generator page
+    When I enter day "22", month "10" and year "2026"
+    And I choose the gender "Male"
+    And I click "Generate Name"
+    Then I should see "You were born on a Thursday"
+    And I should see the Akan name "Yaw"
+
+  Scenario: A female user born on a Thursday
+    Given I am on the Akan Name Generator page
+    When I enter day "22", month "10" and year "2026"
+    And I choose the gender "Female"
+    And I click "Generate Name"
+    Then I should see "You were born on a Thursday"
+    And I should see the Akan name "Yaa"
+
+  Scenario: A user born in January
+    Given I am on the Akan Name Generator page
+    When I enter day "1", month "1" and year "2000"
+    And I choose the gender "Female"
+    And I click "Generate Name"
+    Then I should see "You were born on a Saturday"
+    And I should see the Akan name "Ama"
+
+  Scenario: A user born on a leap day
+    Given I am on the Akan Name Generator page
+    When I enter day "29", month "2" and year "2000"
+    And I choose the gender "Male"
+    And I click "Generate Name"
+    Then I should see "You were born on a Tuesday"
+    And I should see the Akan name "Kwabena"
+
+  Scenario: The user leaves the form empty
+    Given I am on the Akan Name Generator page
+    When I click "Generate Name" without entering anything
+    Then I should see an alert asking me to fill in all the fields
+
+  Scenario: The user enters an invalid month
+    Given I am on the Akan Name Generator page
+    When I enter day "15", month "13" and year "2000"
+    And I choose the gender "Male"
+    And I click "Generate Name"
+    Then I should see an alert saying the month must be between 1 and 12
+
+  Scenario: The user enters a day that does not exist in the month
+    Given I am on the Akan Name Generator page
+    When I enter day "31", month "2" and year "2000"
+    And I choose the gender "Female"
+    And I click "Generate Name"
+    Then I should see an alert saying the day does not exist in that month
+
+  Scenario: The user tries again
+    Given I am viewing my Akan name
+    When I click "Try Again"
+    Then the form should appear again
+    And all the fields should be empty
+```
