@@ -130,3 +130,12 @@ Feature: Akan name generator
     Then the form should appear again
     And all the fields should be empty
 ```
+
+## Author
+
+**Titus Njenga**
+
+## Contact
+
+- Email: titus.njenga@student.moringaschool.com
+- Github: [Njenga77](https://github.com/Njenga77)
