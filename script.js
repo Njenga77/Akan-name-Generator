@@ -29,18 +29,35 @@ function getDaysInMonth(month, year) {
     return daysInMonth [month - 1]; //Browser counts Jan as 0 so we substract one to make it understand the month
 }
 
-function validateInput (day, month, year, gender) {
+//Validating day, month number, year and gender
+function validateInput(day, month, year, gender) {
     if (day === "" || month === "" || year === "" || gender === "") {
-        alert ("Please fill in all the fields");
+    alert("Please fill in all the fields");
+    return false;
+    }
+
+    const dayNum = Number(day);
+    const monthNum = Number(month);
+    const yearNum = Number(year);
+    const currentYear = new Date().getFullYear();
+
+    if (!Number.isInteger(dayNum) || !Number.isInteger(monthNum) || !Number.isInteger(yearNum)) {
+        alert("Day, month and year should be whole numbers");
         return false;
     }
 
-    if (Number(day) < 1 || Number(day) > 31) {
-        alert ("Day must be between 1 and 31.");
+    if (monthNum < 1 || monthNum > 12) {
+        alert("Month must be between 1 and 12.");
         return false;
     }
-    if (Number(month) < 1 || Number(month) > 12) {
-        alert ("Month must be between 1 and 12.");
+    
+    if (yearNum < 1900 || yearNum > currentYear) {
+        alert(`Year must be between 1900 and ${currentYear}.`);
+        return false;
+    }
+
+    if (dayNum < 1 || dayNum > getDaysInMonth(month, year)) {
+        alert ("That day does not exist in the month you entered.");
         return false;
     }
 
