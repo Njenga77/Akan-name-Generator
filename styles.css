@@ -76,6 +76,7 @@ body {
 .wrapper h2::after {
     content: "\2605";
     font-size: 0.6em;
+    line-height: 1;
     color: var(--black);
 }
 
