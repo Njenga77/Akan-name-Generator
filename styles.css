@@ -1,0 +1,87 @@
+:root {
+    --red: #ce1126;
+    --gold: #fcd116;
+    --green: #006b3f;
+    --black: #111111;
+    --cream: #fff6e0;
+    --brown: #5a4632;
+    --kamau: repeating-linear-gradient(
+        90deg,
+        var(--red) 0 20px;
+        var(--gold) 20px 40px;
+        var(--green) 40px 60px;
+        var(--black) 60px 80px;
+    );
+}
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background: radial-gradient(circle at top, #3a2410, #140b05);
+}
+
+.wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    padding: 50px 30px 40px;
+    background: var(--cream);
+    border-radius: 16px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.wrapper::before,
+.wrapper::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 14px;
+    background: var(--kamau);
+}
+
+.wrapper::before {
+    top: 0;
+}
+
+.wrapper::after {
+    bottom: 0;
+}
+
+.wrapper h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    text-align: center;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--black);
+    margin-bottom: 10px;
+}
+
+.wrapper h2::before,
+.wrapper h2::after {
+    content: "/2605";
+    font-size: 0.6em;
+    margin: 0 10px;
+    vertical-align: middle;
+    color: var(--black);
+}
+
+.wrapper p {
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--brown);
+    margin-bottom: 25px;
+}
+
