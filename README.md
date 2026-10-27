@@ -139,3 +139,10 @@ Feature: Akan name generator
 
 - Email: titus.njenga@student.moringaschool.com
 - Github: [Njenga77](https://github.com/Njenga77)
+
+
+## License and Copyright
+
+Copyright (c) 2026 Titus Njenga.
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
