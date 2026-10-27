@@ -1,7 +1,9 @@
+//This is the array of names with corresponding gender and day of the week
 const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 const maleNames = ["Kwasi", "Kwadwo", "Kwabena", "Kwaku", "Yaw", "Kofi", "Kwame"]
 const femaleNames = ["Akosua", "Adwoa", "Abenaa", "Akua", "Yaa", "Afua", "Ama"]
 
+//Storing variables from html
 const dayInput = document.getElementById("day");
 const monthInput = document.getElementById("month");
 const yearInput = document.getElementById("year");
@@ -12,6 +14,20 @@ const akanNameDisplay = document.getElementById("akanName");
 const formSection = document.getElementById("formSection");
 const resultCard = document.getElementById("resultCard");
 const resetButton = document.getElementById("reset");
+
+// To enable leap years and also to indicate Feb not 31 days 
+function isLeapYear(year) {
+    return(year % 4 === 0 && year % 100 !== 0)|| year % 400 === 0;
+}
+
+function getDaysInMonth(month, year) {
+    const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+    if (month === 2 && isLeapYear(year)) {
+        return 29;
+    }
+    return daysInMonth [month - 1]; //Browser counts Jan as 0 so we substract one to make it understand the month
+}
 
 function validateInput (day, month, year, gender) {
     if (day === "" || month === "" || year === "" || gender === "") {
