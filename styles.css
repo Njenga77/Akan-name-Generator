@@ -148,6 +148,27 @@ body {
     transform: translateY(-2px);
 }
 
+.result-card {
+    text-align: center;
+}
+
+.result-card h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 48px;
+    letter-spacing: 2px;
+    color: var(--red);
+    margin: 10px 0 30px;
+}
+
+.result-card h1::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    margin: 12px auto 0;
+    background: var(--kamau);
+}
+
 .hidden {
     display: none;
 }
