@@ -12,20 +12,23 @@
 <body>
     <div class="wrapper">
         <div class="form-section" id="formSection">
-            <h2>NAME GENERATOR</h2>
+            <h2>Name Generator</h2>
             <p>Discover your Akan name, based on the day of the week you were born.</p>
-            <div class="input-box">
-                <label for="day">Day</label>
-                <input type="number" id="day" placeholder="DD" min="1" max="31">
-            </div>
-            <div class="input-box">
-                <label for="month">Month</label>
-                <input type="number" id="month" placeholder="MM" min="1" max="12">
-            </div>
-            <div class="input-box">
-                <label for="year">Year</label>
-                <input type="number" id="year" placeholder="YYYY">
-            </div>
+            <div class="date-row">
+                <div class="input-box">
+                    <label for="day">Day</label>
+                    <input type="number" id="day" placeholder="DD" min="1" max="31">
+                </div>
+                <div class="input-box">
+                    <label for="month">Month</label>
+                    <input type="number" id="month" placeholder="MM" min="1" max="12">
+                </div>
+                <div class="input-box">
+                    <label for="year">Year</label>
+                    <input type="number" id="year" placeholder="YYYY">
+                </div>
+            </div>    
+
             <div class="input-box">
                 <label for="gender">Choose Gender</label>
                 <select id="gender" required >
@@ -36,16 +39,11 @@
             </div>
             <button type="button" id="generate" class="btn">Generate Name</button>
 
-            <div class="progress hidden" id="progress">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
-
-            <p id="message"></p>
         </div>
             <div class="result-card hidden" id="resultCard">
                 <h2>Your Akan name</h2>
-                <p id="bornOn">You were born on Thursday</p>
-                <h1 id="akanName">Abususu</h1>
+                <p id="bornOn"></p>
+                <h1 id="akanName"></h1>
                 <button type="button" id="reset" class="btn">Try Again</button>
             </div>
 
