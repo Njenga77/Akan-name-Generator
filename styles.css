@@ -7,10 +7,10 @@
     --brown: #5a4632;
     --kamau: repeating-linear-gradient(
         90deg,
-        var(--red) 0 20px;
-        var(--gold) 20px 40px;
-        var(--green) 40px 60px;
-        var(--black) 60px 80px;
+        var(--red) 0 20px,
+        var(--gold) 20px 40px,
+        var(--green) 40px 60px,
+        var(--black) 60px 80px,
     );
 }
 * {
@@ -85,3 +85,69 @@ body {
     margin-bottom: 25px;
 }
 
+.date-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.4fr;
+    gap: 12px;
+}
+
+.input-box {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 18px;
+}
+
+.input-box label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--black);
+}
+
+.input-box input, 
+.input-box select {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    color: var(--black);
+    background: #fff;
+    border: 2px solid #d9c9a3;
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-box select {
+    cursor: pointer;
+}
+
+.input-box input:focus,
+.input-box select:focus {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(0, 107, 63, 0.2);
+}
+
+.btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--black);
+    background: var(--gold);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.btn:hover {
+    background: var(--red);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.hidden {
+    display: none;
+}
