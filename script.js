@@ -64,6 +64,7 @@ function validateInput(day, month, year, gender) {
     return true;
 }
 
+//The formula
 function calculateDayOfWeek (day, month, year) {
 // The formula counts January and February as months 13 and 14 of the previous year
     if (month < 3) {
@@ -93,8 +94,16 @@ function showResult (dayNumber, akanName) {
     bornOn.textContent = `You were born on a ${dayNames[dayNumber]}`;
     akanNameDisplay.textContent = akanName;
 
-    formSection.classList.add("hidden");
-    resultCard.classList.remove("hidden");
+    formSection.classList.remove("slide-in");
+    formSection.classList.add("slide-out");
+
+    setTimeout(function () {
+        formSection.classList.add("hidden");
+        formSection.classList.remove("slide-out");
+
+        resultCard.classList.remove("hidden");
+        resultCard.classList.add("slide-in");
+    }, 500);
 }
 
 
@@ -120,5 +129,8 @@ resetButton.addEventListener("click", function () {
     genderSelect.value = "";
 
     resultCard.classList.add("hidden");
+    resultCard.classList.remove("slide-in");
+
+    formSection.classList.add("slide-in");
     formSection.classList.remove("hidden");
-})
+});
