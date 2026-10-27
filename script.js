@@ -1,9 +1,12 @@
+//Akan name data
 //This is the array of names with corresponding gender and day of the week
-const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-const maleNames = ["Kwasi", "Kwadwo", "Kwabena", "Kwaku", "Yaw", "Kofi", "Kwame"]
-const femaleNames = ["Akosua", "Adwoa", "Abenaa", "Akua", "Yaa", "Afua", "Ama"]
+//0 = Sunday, 1 = Monday ... 6 = Saturday
+const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const maleNames = ["Kwasi", "Kwadwo", "Kwabena", "Kwaku", "Yaw", "Kofi", "Kwame"];
+const femaleNames = ["Akosua", "Adwoa", "Abenaa", "Akua", "Yaa", "Afua", "Ama"];
 
-//Storing variables from html
+//===Page elements ===
+//Storing variables to the HTML elements
 const dayInput = document.getElementById("day");
 const monthInput = document.getElementById("month");
 const yearInput = document.getElementById("year");
@@ -15,27 +18,33 @@ const formSection = document.getElementById("formSection");
 const resultCard = document.getElementById("resultCard");
 const resetButton = document.getElementById("reset");
 
-// To enable leap years and also to indicate Feb not 31 days 
+//=== Validation helpers===
+
+// Returns true for a leap year. A leap year is divisible by 4 or if it is a century year divisible by 400
 function isLeapYear(year) {
     return(year % 4 === 0 && year % 100 !== 0)|| year % 400 === 0;
 }
 
+// Returns how many days a month has, so a date like 31 February is rejected
 function getDaysInMonth(month, year) {
     const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
     if (month === 2 && isLeapYear(year)) {
         return 29;
     }
-    return daysInMonth [month - 1]; //Browser counts Jan as 0 so we substract one to make it understand the month
+
+    // Array positions start at 0, so January (month 1) is position 0.
+    return daysInMonth [month - 1]; 
 }
 
-//Validating day, month number, year and gender
+// Checks the user's input. Shows an alert and returns false at the first problem found, or returns true if everything is valid.
 function validateInput(day, month, year, gender) {
     if (day === "" || month === "" || year === "" || gender === "") {
-    alert("Please fill in all the fields");
-    return false;
+        alert("Please fill in all the fields");
+        return false;
     }
 
+    // Values read from input boxes are text, so convert them to numbers.
     const dayNum = Number(day);
     const monthNum = Number(month);
     const yearNum = Number(year);
@@ -56,6 +65,7 @@ function validateInput(day, month, year, gender) {
         return false;
     }
 
+    // The day is checked last because it depends on a valid month and year.
     if (dayNum < 1 || dayNum > getDaysInMonth(monthNum, yearNum)) {
         alert ("That day does not exist in the month you entered.");
         return false;
@@ -64,7 +74,10 @@ function validateInput(day, month, year, gender) {
     return true;
 }
 
-//The formula
+// ==== Calculation ====
+
+// Finds the day of the week using the formula from the assignment brief.
+// Returns a number from 0 (Sunday) to 6 (Saturday).
 function calculateDayOfWeek (day, month, year) {
 // The formula counts January and February as months 13 and 14 of the previous year
     if (month < 3) {
@@ -72,17 +85,20 @@ function calculateDayOfWeek (day, month, year) {
         year = year - 1;
     }
 
-    const cc = Math.floor(year / 100);
-    const yy = year % 100;
+    const cc = Math.floor(year / 100); // first two digits of the year
+    const yy = year % 100;             // last two digits of the year
 
+    // Math.floor rounds down, because the formula uses whole-number division.
     const d = (Math.floor(cc / 4) - 2 * cc - 1
         + Math.floor((5 * yy) / 4)
         + Math.floor( (26 * (month + 1)) / 10 )
         + day) % 7;
     
+    // In JavaScript, % can give a negative result, so add 7 and take the remainder again to land between 0 and 6.
     return (d + 7) % 7;
 }
 
+// Picks the Akan name for a day number, using the male or female list.
 function getAkanName (dayNumber, gender) {
     if (gender === "male") {
         return maleNames[dayNumber];
@@ -90,6 +106,9 @@ function getAkanName (dayNumber, gender) {
     return femaleNames[dayNumber];
 }
 
+// ===== Showing the result =====
+
+// Fills in the result card, slides the form out to the left, then slides the card in.
 function showResult (dayNumber, akanName) {
     bornOn.textContent = `You were born on a ${dayNames[dayNumber]}`;
     akanNameDisplay.textContent = akanName;
@@ -97,6 +116,7 @@ function showResult (dayNumber, akanName) {
     formSection.classList.remove("slide-in");
     formSection.classList.add("slide-out");
 
+    // Wait 500 ms, the same length as the slide-out animation in styles.css, so the form is not hidden before its animation finishes.
     setTimeout(function () {
         formSection.classList.add("hidden");
         formSection.classList.remove("slide-out");
@@ -106,7 +126,9 @@ function showResult (dayNumber, akanName) {
     }, 500);
 }
 
+// ===== Events =====
 
+// When "Generate Name" is clicked: read the input, validate it, calculate the day, find the name and show it.
 generateButton.addEventListener ("click", function () {
     const day = dayInput.value;
     const month = monthInput.value;
@@ -114,7 +136,7 @@ generateButton.addEventListener ("click", function () {
     const gender = genderSelect.value;
 
     if (!validateInput(day, month, year, gender)) {
-        return;
+        return; // stop here if the input is invalid
     }
 
     const dayNumber = calculateDayOfWeek (Number(day), Number(month), Number(year) );
@@ -122,6 +144,7 @@ generateButton.addEventListener ("click", function () {
     showResult(dayNumber, akanName);
 });
 
+// When "Try Again" is clicked: clear every field and bring the form back.
 resetButton.addEventListener("click", function () {
     dayInput.value = "";
     monthInput.value = "";
