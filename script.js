@@ -56,7 +56,7 @@ function validateInput(day, month, year, gender) {
         return false;
     }
 
-    if (dayNum < 1 || dayNum > getDaysInMonth(month, year)) {
+    if (dayNum < 1 || dayNum > getDaysInMonth(monthNum, yearNum)) {
         alert ("That day does not exist in the month you entered.");
         return false;
     }
@@ -75,7 +75,7 @@ function calculateDayOfWeek (day, month, year) {
     const cc = Math.floor(year / 100);
     const yy = year % 100;
 
-    d = (Math.floor(cc / 4) - 2 * cc - 1
+    const d = (Math.floor(cc / 4) - 2 * cc - 1
         + Math.floor((5 * yy) / 4)
         + Math.floor( (26 * (month + 1)) / 10 )
         + day) % 7;
